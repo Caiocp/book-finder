@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, FlatList, Text, StyleSheet, Image } from "react-native";
+import { APIKEY } from "../enviroment";
 import Axios from "axios";
 
 import defaultImage from "../../assets/book.jpg";
@@ -43,7 +44,7 @@ export default function BookList({ term }) {
       setTimeOuts(
         setTimeout(async () => {
           const { data } = await Axios.get(
-            `https://www.googleapis.com/books/v1/volumes?q=${term}&key=AIzaSyAzE9WskP2DcVuKZSK7hc-cdKIag4PRa6U&startIndex=${page}`
+            `https://www.googleapis.com/books/v1/volumes?q=${term}&key=${APIKEY}&startIndex=${page}`
           );
           data && setBooks(data.items);
         }, 300)
