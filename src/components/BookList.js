@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, FlatList, Text, StyleSheet, Image } from "react-native";
-import { APIKEY } from "../enviroment";
+// import { APIKEY } from "../enviroment";
 import Axios from "axios";
 
 import defaultImage from "../../assets/book.jpg";
@@ -10,7 +10,7 @@ export default function BookList({ term }) {
   const [page, setPage] = useState(0);
   const [timeOuts, setTimeOuts] = useState(null);
 
-  function renderBook({ item }) {
+  function renderBook({ item = "" }) {
     return (
       <View style={styles.bookContainer}>
         {item.volumeInfo.imageLinks ? (
@@ -44,9 +44,9 @@ export default function BookList({ term }) {
       setTimeOuts(
         setTimeout(async () => {
           const { data } = await Axios.get(
-            `https://www.googleapis.com/books/v1/volumes?q=${term}&key=${APIKEY}&startIndex=${page}`
+            `https://www.googleapis.com/books/v1/volumes?q=${term}&startIndex=${page}`
           );
-          data && setBooks(data.items);
+          data && setBooks([...books ,...data.items]);
         }, 300)
       );
     }

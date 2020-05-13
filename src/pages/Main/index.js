@@ -5,7 +5,6 @@ import BookList from "../../components/BookList";
 
 export default function Main() {
   const [search, setSearch] = useState("");
-  console.log(`o termo '${search}' foi passado`);
 
   return (
     <View style={styles.container}>
