@@ -36,9 +36,31 @@ export default function BookList({ term }) {
 
   useEffect(() => {
     loadBooks();
-  }, [term, page]);
+    console.log(`${term} pesquisado`)
+  }, [term]);
+
+  useEffect(() => {
+    paginatonRequest();
+  }, [page])
 
   function loadBooks() {
+    setBooks([])
+    setPage(0)
+    setTimeOuts(clearTimeout(timeOuts));
+    if (term.length) {
+      setTimeOuts(
+        setTimeout(async () => {
+          const { data } = await Axios.get(
+            `https://www.googleapis.com/books/v1/volumes?q=${term}`
+          );
+          data && setBooks([...books ,...data.items]);
+        }, 300)
+      );
+    }
+  }
+
+  function paginatonRequest() {
+    console.log(page)
     setTimeOuts(clearTimeout(timeOuts));
     if (term.length) {
       setTimeOuts(
