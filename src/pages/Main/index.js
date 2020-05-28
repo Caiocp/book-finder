@@ -27,14 +27,12 @@ export default function Main({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    marginTop: Constants.statusBarHeight,
+    backgroundColor: '#fafafa',
+    marginTop: Constants.statusBarHeight + 20,
   },
-
   searchSection: {
     flexDirection: 'row',
-    marginTop: 40,
-    marginBottom: 40,
+    marginBottom: 20,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -43,6 +41,6 @@ const styles = StyleSheet.create({
     width: '90%',
     borderRadius: 5,
     padding: 10,
-    backgroundColor: '#ebebeb',
+    backgroundColor: '#e0e0e0',
   },
 });

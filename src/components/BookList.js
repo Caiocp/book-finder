@@ -40,7 +40,7 @@ export default function BookList({ navigation, term }) {
               navigation.navigate('BookDetail', { book: item });
             }}
           >
-            <Text style={styles.seeMoreTxt}>Ver mais!</Text>
+            <Text style={styles.seeMoreTxt}>Ver mais detalhes</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -90,25 +90,36 @@ export default function BookList({ navigation, term }) {
   }
 
   return (
-    <View>
-      <FlatList
-        data={books}
-        keyExtractor={(book) => book.id}
-        renderItem={renderBook}
-        onEndReached={loadMore}
-        onEndReachedThreshold={0.1}
-      />
+    <View style={styles.container}>
+      {term ? (
+        <FlatList
+          data={books}
+          keyExtractor={(book) => book.id}
+          renderItem={renderBook}
+          onEndReached={loadMore}
+          onEndReachedThreshold={0.1}
+        />
+      ) : (
+        <Text style={{ fontSize: 18 }}>
+          Sinta-se livre para fazer uma pesquisa!
+        </Text>
+      )}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fafafa',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   bookContainer: {
     flexDirection: 'row',
-    backgroundColor: '#fff',
+    backgroundColor: '#fafafa',
     borderWidth: 1,
     borderColor: '#ddd',
-    borderRadius: 5,
     padding: 20,
   },
   bookDescriptionContainer: {
@@ -121,7 +132,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     color: '#333',
-    textAlign: 'center',
+    textAlign: 'left',
     marginBottom: 5,
   },
   bookImage: {
@@ -134,10 +145,9 @@ const styles = StyleSheet.create({
     color: '#666',
   },
   seeMoreTxt: {
-    fontSize: 18,
+    fontSize: 16,
     color: '#486ABC',
-    marginTop: 10,
-    textDecorationLine: 'underline',
-    textDecorationStyle: 'solid',
+    marginTop: 20,
+    fontWeight: 'bold',
   },
 });
