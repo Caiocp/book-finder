@@ -1,10 +1,11 @@
-import React, { useState } from "react";
-import { View, TextInput, StyleSheet } from "react-native";
+import React, { useState } from 'react';
+import { View, TextInput, StyleSheet } from 'react-native';
+import Constants from 'expo-constants';
 
-import BookList from "../../components/BookList";
+import BookList from '../../components/BookList';
 
-export default function Main() {
-  const [search, setSearch] = useState("");
+export default function Main({ navigation }) {
+  const [search, setSearch] = useState('');
 
   return (
     <View style={styles.container}>
@@ -18,7 +19,7 @@ export default function Main() {
         />
       </View>
 
-      <BookList term={search} />
+      <BookList term={search} navigation={navigation} />
     </View>
   );
 }
@@ -26,22 +27,22 @@ export default function Main() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
+    marginTop: Constants.statusBarHeight,
   },
 
   searchSection: {
-    flexDirection: "row",
+    flexDirection: 'row',
     marginTop: 40,
     marginBottom: 40,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   searchInput: {
     height: 45,
-    width: "90%",
+    width: '90%',
     borderRadius: 5,
     padding: 10,
-    backgroundColor: "#ebebeb",
+    backgroundColor: '#ebebeb',
   },
-  searchIcon: {},
 });

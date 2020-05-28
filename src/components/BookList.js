@@ -1,16 +1,22 @@
-import React, { useState, useEffect } from "react";
-import { View, FlatList, Text, StyleSheet, Image } from "react-native";
-// import { APIKEY } from "../enviroment";
-import Axios from "axios";
+import React, { useState, useEffect } from 'react';
+import {
+  View,
+  FlatList,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+} from 'react-native';
+import Axios from 'axios';
 
-import defaultImage from "../../assets/book.jpg";
+import defaultImage from '../../assets/book.jpg';
 
-export default function BookList({ term }) {
+export default function BookList({ navigation, term }) {
   const [books, setBooks] = useState([]);
   const [page, setPage] = useState(0);
   const [timeOuts, setTimeOuts] = useState(null);
 
-  function renderBook({ item = "" }) {
+  function renderBook({ item }) {
     return (
       <View style={styles.bookContainer}>
         {item.volumeInfo.imageLinks ? (
@@ -29,6 +35,13 @@ export default function BookList({ term }) {
           <Text style={styles.bookDescription} numberOfLines={5}>
             {item.volumeInfo.description}
           </Text>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('BookDetail', { book: item });
+            }}
+          >
+            <Text style={styles.seeMoreTxt}>Ver mais!</Text>
+          </TouchableOpacity>
         </View>
       </View>
     );
@@ -36,16 +49,16 @@ export default function BookList({ term }) {
 
   useEffect(() => {
     loadBooks();
-    console.log(`${term} pesquisado`)
+    console.log(`${term} pesquisado`);
   }, [term]);
 
   useEffect(() => {
     paginatonRequest();
-  }, [page])
+  }, [page]);
 
   function loadBooks() {
-    setBooks([])
-    setPage(0)
+    setBooks([]);
+    setPage(0);
     setTimeOuts(clearTimeout(timeOuts));
     if (term.length) {
       setTimeOuts(
@@ -53,14 +66,14 @@ export default function BookList({ term }) {
           const { data } = await Axios.get(
             `https://www.googleapis.com/books/v1/volumes?q=${term}`
           );
-          data && setBooks([...books ,...data.items]);
+          data && setBooks([...books, ...data.items]);
         }, 300)
       );
     }
   }
 
   function paginatonRequest() {
-    console.log(page)
+    console.log(page);
     setTimeOuts(clearTimeout(timeOuts));
     if (term.length) {
       setTimeOuts(
@@ -68,7 +81,7 @@ export default function BookList({ term }) {
           const { data } = await Axios.get(
             `https://www.googleapis.com/books/v1/volumes?q=${term}&startIndex=${page}`
           );
-          data && setBooks([...books ,...data.items]);
+          data && setBooks([...books, ...data.items]);
         }, 300)
       );
     }
@@ -93,22 +106,24 @@ export default function BookList({ term }) {
 
 const styles = StyleSheet.create({
   bookContainer: {
-    flexDirection: "row",
-    backgroundColor: "#fff",
+    flexDirection: 'row',
+    backgroundColor: '#fff',
     borderWidth: 1,
-    borderColor: "#ddd",
+    borderColor: '#ddd',
     borderRadius: 5,
     padding: 20,
   },
   bookDescriptionContainer: {
-    flexDirection: "column",
-    width: "70%",
+    flexDirection: 'column',
+    width: '70%',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   bookTitle: {
     fontSize: 18,
-    fontWeight: "bold",
-    color: "#333",
-    textAlign: "center",
+    fontWeight: 'bold',
+    color: '#333',
+    textAlign: 'center',
     marginBottom: 5,
   },
   bookImage: {
@@ -118,6 +133,13 @@ const styles = StyleSheet.create({
   },
   bookDescription: {
     fontSize: 14,
-    color: "#666",
+    color: '#666',
+  },
+  seeMoreTxt: {
+    fontSize: 18,
+    color: '#486ABC',
+    marginTop: 10,
+    textDecorationLine: 'underline',
+    textDecorationStyle: 'solid',
   },
 });
