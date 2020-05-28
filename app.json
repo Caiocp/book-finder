@@ -4,8 +4,7 @@
     "slug": "book-finder",
     "platforms": [
       "ios",
-      "android",
-      "web"
+      "android"
     ],
     "version": "1.0.0",
     "orientation": "portrait",
@@ -23,6 +22,9 @@
     ],
     "ios": {
       "supportsTablet": true
+    },
+    "android": {
+      "package": "com.caiocp.bookfinder"
     },
     "androidStatusBar": {
       "backgroundColor" : "#486ABC",
