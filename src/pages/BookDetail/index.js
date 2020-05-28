@@ -14,5 +14,5 @@ export default function BookDetail({ route, navigation }) {
     headerTitleAlign: 'center',
   });
 
-  return <WebView source={{ uri: book.volumeInfo.previewLink }} />;
+  return <WebView source={{ uri: book.volumeInfo.infoLink }} />;
 }
