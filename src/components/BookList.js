@@ -49,7 +49,6 @@ export default function BookList({ navigation, term }) {
 
   useEffect(() => {
     loadBooks();
-    console.log(`${term} pesquisado`);
   }, [term]);
 
   useEffect(() => {
@@ -73,7 +72,6 @@ export default function BookList({ navigation, term }) {
   }
 
   function paginatonRequest() {
-    console.log(page);
     setTimeOuts(clearTimeout(timeOuts));
     if (term.length) {
       setTimeOuts(
