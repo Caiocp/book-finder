@@ -23,7 +23,7 @@ O arquivo para download do aplicativo está disponível através do link abaixo.
 Caso não queira baixar no seu próprio celular, use o expo snack para testar.
  - **[Expo snack](https://snack.expo.io/@git/github.com/Caiocp/book-finder)**
 
-basta entrar no link acima, e no lado direito da tela selecionar a opção `Android` e depois em `Tap to play` que o aplicativo irá rodar em um emulador no prório site.
+basta entrar no link acima, e no lado direito da tela selecionar a opção `Android` e depois em `Tap to play` que o aplicativo irá rodar em um emulador no próprio site.
 
 *Pode acontecer uma fila na execução do aplicativo no emulador, caso ocorra, é só esperar alguns segundos*
 
